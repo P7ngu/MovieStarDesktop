@@ -20,13 +20,15 @@ public class SchermataConsigliaFilm extends JFrame {
 
 	private JPanel contentPane;
 	private MainController myController;
+	private ConsigliaFilmController consigliaFilmController;
 	private JTextField textField;
 	private JTextField textField_filmname;
 	/**
 	 * Create the frame.
 	 */
-	public SchermataConsigliaFilm(MainController controller, ArrayList<Film> movieList) {
+	public SchermataConsigliaFilm(MainController controller, ConsigliaFilmController consigliaFilmCtrl, ArrayList<Film> movieList) {
 		myController=controller;
+		consigliaFilmController=consigliaFilmCtrl;
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1248, 873);
@@ -59,6 +61,9 @@ public class SchermataConsigliaFilm extends JFrame {
 		JButton btnNewButton = new JButton("INVIA CONSIGLIO AGLI ISCRITTI");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Film filmSelezionato = (Film) comboBox.getSelectedItem();
+				if(filmSelezionato!=null) consigliaFilmController.sendConsiglioFilm(filmSelezionato);
+				else myController.creaMessaggioErroreDuranteOperazione("Selezionare un film dalla ComboBox", "Errore!");
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.ITALIC, 17));

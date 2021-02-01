@@ -23,7 +23,8 @@ public class SchermataInviaMailPromo extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SchermataInviaMailPromo(MainController controller) {
+	public SchermataInviaMailPromo(MainController controller, MailPromoController mailCTRL) {
+		mailPromoController=mailCTRL;
 		myController=controller;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1248, 873);
@@ -52,15 +53,7 @@ public class SchermataInviaMailPromo extends JFrame {
 		lblTesto.setFont(new Font("Tahoma", Font.PLAIN, 29));
 		lblTesto.setBounds(113, 235, 98, 76);
 		contentPane.add(lblTesto);
-		
-		JButton btnNewButton = new JButton("INVIA MAIL PROMOZIONALE AGLI ISCRITTI");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton.setFont(new Font("Tahoma", Font.ITALIC, 17));
-		btnNewButton.setBounds(746, 716, 458, 76);
-		contentPane.add(btnNewButton);
+	
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setLineWrap(true);
@@ -77,5 +70,15 @@ public class SchermataInviaMailPromo extends JFrame {
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnNewButton_1.setBounds(10, 11, 147, 43);
 		contentPane.add(btnNewButton_1);
+		
+		JButton btnNewButton = new JButton("INVIA MAIL PROMOZIONALE AGLI ISCRITTI");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mailPromoController.sendMailPromo(textField.getText().toString().trim(), textArea.getText().toString().trim());
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.ITALIC, 17));
+		btnNewButton.setBounds(746, 716, 458, 76);
+		contentPane.add(btnNewButton);
 	}
 }
